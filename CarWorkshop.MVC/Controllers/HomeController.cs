@@ -20,7 +20,20 @@ public class HomeController : Controller
 
     public IActionResult Privacy()
     {
-        return View();
+        var model = new List<Person>() { 
+            new Person()
+            {
+                FirstName = "Adam",
+                LastName = "Małysz"
+            },
+            new Person()
+            {
+                FirstName = "Monika",
+                LastName = "Janik"
+            }
+        };
+
+        return View(model);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
