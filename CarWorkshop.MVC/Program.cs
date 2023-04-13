@@ -1,6 +1,4 @@
 using CarWorkshop.Infrastructure.Extensions;
-using CarWorkshop.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
