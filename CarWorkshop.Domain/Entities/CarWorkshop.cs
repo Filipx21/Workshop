@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarWorkshop.Domain.Models
+namespace CarWorkshop.Domain.Entities
 {
     public class CarWorkshop
     {

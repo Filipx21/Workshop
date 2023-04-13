@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarWorkshop.Domain.Models
+namespace CarWorkshop.Domain.Entities
 {
     public class CarWorkshopContactDetails
     {
+        public int Id { get; set; }
         public string? PhoneNumber { get; set; }
         public string? Street { get; set; }
         public string? City { get; set; }
