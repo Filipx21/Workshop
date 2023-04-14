@@ -1,12 +1,20 @@
+using CarWorkshop.Application.Extensions;
 using CarWorkshop.Infrastructure.Extensions;
+using CarWorkshop.Infrastructure.Seeders;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication();
 
 var app = builder.Build();
+
+var scope = app.Services.CreateScope();
+var seeder = scope.ServiceProvider.GetRequiredService<CarWorkshopSeeder>();
+await seeder.Seed();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
