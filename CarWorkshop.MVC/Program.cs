@@ -5,7 +5,7 @@ using CarWorkshop.Infrastructure.Seeders;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true); //wy³¹cznie domyœlnej walidacji
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 

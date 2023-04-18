@@ -24,11 +24,17 @@ namespace CarWorkshop.Infrastructure.Repositories
             await dbContext.SaveChangesAsync();
         }
 
+        public async Task Commit()
+            => await dbContext.SaveChangesAsync();
+
         public async Task<IEnumerable<Domain.Entities.CarWorkshop>> GetAll()
             => await dbContext.CarWorkshops.ToListAsync();
 
+        public async Task<Domain.Entities.CarWorkshop> GetByEncodedName(string encodedName)
+            => await dbContext.CarWorkshops.Include(z => z.ContactDetails).FirstAsync(x => x.EncodedName == encodedName);
+
         public async Task<Domain.Entities.CarWorkshop?> GetByName(string name)
             =>  await dbContext.CarWorkshops.FirstOrDefaultAsync(c => c.Name.ToLower() == name.ToLower());
-        
+
     }
 }

@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using FluentValidation;
 using CarWorkshop.Application.Mediator.Commands.CreateCarWorkshop;
 using MediatR;
+using CarWorkshop.Application.Mediator.Commands.EditCarWorkshop;
 
 namespace CarWorkshop.Application.Extensions
 {
@@ -26,6 +27,7 @@ namespace CarWorkshop.Application.Extensions
             services.AddValidatorsFromAssemblyContaining<CreateCarWorkshopCommandValidator>()
                 .AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters();
+
         }
     }
 }
