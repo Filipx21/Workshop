@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using CarWorkshop.Application.DTO.Commands.CarWorkshop;
 using CarWorkshop.Domain.Interfaces;
-using CarWorkshop.Infrastructure.Repositories;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -9,16 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarWorkshop.Application.DTO.Commands.Handlers
+namespace CarWorkshop.Application.Mediator.Commands.CreateCarWorkshop
 {
-    public class CarWorkshopCommandHandler : IRequestHandler<CreateCarWorkshopCommand>
+    public class CreateCarWorkshopCommandHandler : IRequestHandler<CreateCarWorkshopCommand>
     {
-        private readonly ICarWorkshopRepository carWorkshopRepository;
+        private readonly ICarWorkshopRepository _carWorkshopRepository;
         private readonly IMapper _mapper;
 
-        public CarWorkshopCommandHandler(ICarWorkshopRepository carWorkshopRepository, IMapper mapper)
+        public CreateCarWorkshopCommandHandler(ICarWorkshopRepository carWorkshopRepository, IMapper mapper)
         {
-            this.carWorkshopRepository = carWorkshopRepository;
+            _carWorkshopRepository = carWorkshopRepository;
             _mapper = mapper;
         }
 
@@ -27,7 +25,7 @@ namespace CarWorkshop.Application.DTO.Commands.Handlers
             var carWorkshop = _mapper.Map<Domain.Entities.CarWorkshop>(request);
 
             carWorkshop.EncodeName();
-            await carWorkshopRepository.Create(carWorkshop);
+            await _carWorkshopRepository.Create(carWorkshop);
 
             return Unit.Value;
         }

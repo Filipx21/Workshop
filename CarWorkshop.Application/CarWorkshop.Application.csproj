@@ -18,8 +18,4 @@
     <ProjectReference Include="..\CarWorkshop.Infrastructure\CarWorkshop.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DTO\Commands\Queries\" />
-  </ItemGroup>
-
 </Project>

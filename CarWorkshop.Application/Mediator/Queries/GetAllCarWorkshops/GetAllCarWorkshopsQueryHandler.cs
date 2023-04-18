@@ -1,0 +1,28 @@
+﻿using AutoMapper;
+using CarWorkshop.Application.DTO;
+using CarWorkshop.Application.Mediator.Queries;
+using CarWorkshop.Domain.Interfaces;
+using MediatR;
+
+namespace CarWorkshop.Application.Mediator.Queries.GetAllCarWorkshops
+{
+    public class GetAllCarWorkshopsQueryHandler : IRequestHandler<GetAllCarWorkshopsQuery, IEnumerable<CarWorkshopDto>>
+    {
+        private readonly ICarWorkshopRepository _carWorkshopRepository;
+        private readonly IMapper _mapper;
+
+        public GetAllCarWorkshopsQueryHandler(ICarWorkshopRepository carWorkshopRepository, IMapper mapper)
+        {
+            _carWorkshopRepository = carWorkshopRepository;
+            _mapper = mapper;
+        }
+        public async Task<IEnumerable<CarWorkshopDto>> Handle(GetAllCarWorkshopsQuery request, CancellationToken cancellationToken)
+        {
+            var carWorkshops = await _carWorkshopRepository.GetAll();
+            var carWorkshopsDto = _mapper.Map<IEnumerable<CarWorkshopDto>>(carWorkshops);
+
+            return carWorkshopsDto;
+        }
+
+    }
+}

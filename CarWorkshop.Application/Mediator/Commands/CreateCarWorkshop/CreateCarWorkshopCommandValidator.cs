@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarWorkshop.Application.Validators
+namespace CarWorkshop.Application.Mediator.Commands.CreateCarWorkshop
 {
-    public class CarWorkshopDtoValidator : AbstractValidator<CarWorkshopDto>
+    public class CreateCarWorkshopCommandValidator : AbstractValidator<CreateCarWorkshopCommand>
     {
-        public CarWorkshopDtoValidator(ICarWorkshopRepository repository)
+        public CreateCarWorkshopCommandValidator(ICarWorkshopRepository repository)
         {
             RuleFor(c => c.Name)
                 .NotEmpty().WithMessage("To pole jest wymagane")
@@ -20,7 +20,7 @@ namespace CarWorkshop.Application.Validators
                 .Custom((value, context) =>
                 {
                     var existingCarWorkshop = repository.GetByName(value).Result;
-                    if(existingCarWorkshop != null)
+                    if (existingCarWorkshop != null)
                     {
                         context.AddFailure($"Podana nazwa: {value} już istnieje w bazie danych");
                     }
