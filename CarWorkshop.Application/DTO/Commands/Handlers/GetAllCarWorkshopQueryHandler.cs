@@ -1,35 +1,27 @@
 ﻿using AutoMapper;
-using CarWorkshop.Application.DTO;
+using CarWorkshop.Application.DTO.Commands.CarWorkshop;
 using CarWorkshop.Domain.Interfaces;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarWorkshop.Application.Services
+namespace CarWorkshop.Application.DTO.Commands.Handlers
 {
-    public class CarWorkshopService : ICarWorkshopService
+    public class GetAllCarWorkshopQuery : IRequestHandler<GetAllCarWorkshopsQuery, IEnumerable<CarWorkshopDto>>
     {
-
         private readonly ICarWorkshopRepository carWorkshopRepository;
         private readonly IMapper _mapper;
 
-        public CarWorkshopService(ICarWorkshopRepository carWorkshopRepository, IMapper mapper)
+        public GetAllCarWorkshopQuery(ICarWorkshopRepository carWorkshopRepository, IMapper mapper)
         {
             this.carWorkshopRepository = carWorkshopRepository;
             _mapper = mapper;
         }
 
-        public async Task Create(CarWorkshopDto carWorkshopDto)
-        {
-            var carWorkshop = _mapper.Map<Domain.Entities.CarWorkshop>(carWorkshopDto);
-
-            carWorkshop.EncodeName();
-            await carWorkshopRepository.Create(carWorkshop);
-        }
-
-        public async Task<IEnumerable<CarWorkshopDto>> GetAll()
+        public async Task<IEnumerable<CarWorkshopDto>> Handle(GetAllCarWorkshopsQuery request, CancellationToken cancellationToken)
         {
             var carWorkshops = await carWorkshopRepository.GetAll();
             var carWorkshopsDto = _mapper.Map<IEnumerable<CarWorkshopDto>>(carWorkshops);
